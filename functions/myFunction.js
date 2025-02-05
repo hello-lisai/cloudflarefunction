@@ -10,7 +10,7 @@ export async function onRequest(context) {
     const db = context.env.D1_DB;
 
     // 执行查询
-    const query = 'SELECT * FROM your_table_name';
+    const query = 'SELECT * FROM comments';
     try {
         const result = await db.prepare(query).all();
         return new Response(JSON.stringify(result), {
