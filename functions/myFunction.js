@@ -1,4 +1,11 @@
 export async function onRequest(context) {
+    // 检查绑定是否存在
+    if (!context.env.D1_DB) {
+        return new Response('D1_DB binding is undefined', {
+            headers: { 'Content-Type': 'text/plain' },
+        });
+    }
+
     // 获取绑定的 D1 数据库实例
     const db = context.env.D1_DB;
 
