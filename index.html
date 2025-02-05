@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调用 Cloudflare Function</title>
+</head>
+<body>
+    <h1>调用 Cloudflare Function</h1>
+    <button id="callFunction">调用函数</button>
+    <pre id="response"></pre>
+
+    <script>
+        document.getElementById('callFunction').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/myFunction'); // 使用相对路径
+                
+                if (!response.ok) {
+                    throw new Error('网络响应不是 OK');
+                }
+
+                const data = await response.text(); // 或者使用 response.json() 如果返回的是 JSON
+                document.getElementById('response').textContent = data;
+            } catch (error) {
+                console.error('调用函数时出错:', error);
+                document.getElementById('response').textContent = '出错: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
